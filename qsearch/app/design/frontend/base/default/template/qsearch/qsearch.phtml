@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+    $j(document).ready(function(){
+        $j('#search_autocomplete').remove();
+        $j('#search_mini_form').append('<div id="qsearch" class="search-autocomplete"></div>');
+        $j("#search").focusin(function() {$j("#qsearch").show();});
+        $j("#search").focusout(function() {$j("#qsearch").hide();});
+        $j(document).on('keyup change','#search',function(){qsearchAjax()});
+    });
+    var qsLastSearch = '';
+    function qsearchAjax(){
+        var qsKeyword=$j('#search').val();
+        if(qsKeyword.length>2){
+            if(qsLastSearch!= qsKeyword){
+                qsLastSearch=qsKeyword;
+                $j.ajax({
+                    url: "<?php echo $this->getUrl('qsearch/ajaxsearch/ajax/') ?>",
+                    type: "POST",
+                    data: "keyword="+qsKeyword,
+                    success: function(data) {
+                        if(data.p!=undefined){
+                            var qsPr=data.p;
+                            var qsResponce='<ul>';
+                            qsPr.each(function(v,e){
+                                qsResponce+='\
+                                <li><a href="'+v.u+'">\
+                                <div class="autocomplete_product">\
+                                <div class="image">\
+                                <img src="<?php echo $this->getBaseUrl()?>media/catalog/product'+v.t+'">\
+                                </div>\
+                                <span class="title">'+v.n+'<br><span class="price">Rs. '+v.p+'</span></span>\
+                                </div>\
+                                </a></li>\
+                                ';
+                            });
+                            qsResponce+='</ul>';
+                            $j('#qsearch').html(qsResponce);
+                            $j('#qsearch').show();
+                        }
+                    }
+                });
+            }
+        }
+    }
+</script>

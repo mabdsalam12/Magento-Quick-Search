@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="core/template" name="loadjs" template="qsearch/qsearch.phtml" />
+<!--            <action method="addItem"><type>skin_js</type><name>js/qsearch/qsearch.js</name></action>-->
+            <action method="addCss"><stylesheet>css/qsearch/qsearch.css</stylesheet></action>
+        </reference>
+    </default>
+</layout>

@@ -1,0 +1,25 @@
+<config>
+    <modules>
+        <Abdus_Qsearch>
+            <version>1.0.0</version>
+        </Abdus_Qsearch>
+    </modules>
+    <frontend>
+		<layout>
+			<updates>
+				<abdus_qsearch module="Abdus_Qsearch">
+					<file>qsearch/abdus_qsearch.xml</file>
+				</abdus_qsearch>
+			</updates>
+		</layout>
+        <routers>
+            <qsearch>
+                <use>standard</use>
+                <args>
+                    <module>Abdus_Qsearch</module>
+                    <frontName>qsearch</frontName>
+                </args>
+            </qsearch>
+        </routers>
+    </frontend>
+</config>
